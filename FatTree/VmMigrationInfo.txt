@@ -1,0 +1,30 @@
+Process model for virtual machine migration.
+
+The accompanying picture of the process model for virtual machine migration shows the different
+finite state machines and how the messages flow to trigger the process.
+
+The procedure starts with the DCTCPControllerApp which finds a used vm. Additionally the function
+is searching for a hypervisor with a deactivated vm. This process is up to improvement.
+
+With calling a method from it's partner module, the SystemController, which sends a special message
+back to the DCTCPControllerThread we begin the migration process with changing the traffic controller
+from INIT to IDLE state.
+
+It's only possible to migrate one virtual machine at the time.
+
+HV1 = source hypervisor
+VM1 = source virtual machine
+HV2 = target hypervisor
+VM2 = target virtual machine
+
+1. When necessary, the target hypervisor/server is activated.
+2. Message goes back to controller, which triggers the copy process.
+3. The source hypervisor sends data to the target hypervisor, to simulate
+   the transfer of one server to another.
+4. The source hypervisor answers back to the controller which triggers the last steps.
+5. Target vm is turned on, the source vm is turned off and result of this process goes back to
+   the controller.
+6. When necessary, the source hypervisor is deactived. Again, the controller is receiving a message,
+   when the process was successful.
+7. Finally, the controller sends the message back to the module (here SystemController) which started
+   the process. From there a function from DCTCPControllerApp is called to allow further migrations.

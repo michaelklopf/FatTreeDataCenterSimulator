@@ -1,0 +1,3 @@
+package fattree;
+
+@license(LGPL);
