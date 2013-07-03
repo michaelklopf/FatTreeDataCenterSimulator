@@ -10,7 +10,7 @@ implemented and works for itself but it is not working when traffic is routed to
 machines.
 
 A few words to begin with:
-The simulation was created as part of a diploma thesis at the University of Würzburg, Germany.
+The simulation was created as part of my diploma thesis at the University of Würzburg, Germany.
 Due to time constraints it is partly unfinished, also commented debug code is still in there.
 Also some features still won't work, i.e., virtual machine migration. It is completely 
 implemented but bugs in the underlying INET framework (which is the only reason I can come up
